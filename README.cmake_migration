@@ -1,0 +1,64 @@
+=======================================================
+Information about the CMake build system imlpementation 
+=======================================================
+
+These instructions detail how to add CMake support directly into VASP,
+starting from the vasp-5.3.2 source archive. In order to implement a modern
+CMake based buildsystem for VASP in a reasonable way, the following steps have
+been performed in the vasp toplevel directory::
+
+    $ mkdir src src/makefiles include 
+    $ for i in *.F; do mv $i src/`basename $i .F`.F90; done
+    $ mv src/fft3dsimple.F90 src/fft3dsimple.F
+    $ mv *.inc include
+    $ mv makefile.* src/makefiles
+
+    $ cd src
+    $ sed -i 's/\.F/.F90/g' makefiles/makefile.*
+    $ ln -s makefiles/makefile.linux_ifc_P4 Makefile
+    $ cd ..
+
+For the vasp5 internal lapack library, the following steps were performed::
+
+    $ mkdir lapack lapack/makefiles
+    $ cd lapack
+    $ cp -r /path/to/vasp5.lib/* .
+    $ mv makefile.* src/makefiles
+    $ ln -s makefiles/makefile.linux_ifc_P4 Makefile
+
+    $ for i in *.F; do mv $i `basename $i .F`.F90; done
+    $ sed -i 's/\.F/.F90/g' makefiles/makefile.*
+    $ cd ..
+
+Performing these steps ensures that the original makefiles will still work
+after adding the CMake build configuration::
+
+    $ tar vfxz /path/to/vasp-cmake-files.tar.gz
+
+Quick start 
+------------
+
+#. Make sure you have a recent version of cmake installed.
+#. To quickly test the new configuration (Currently only Intel Fortran is
+   properly supported)::
+
+    $ ./setup --prefix=/tmp/vasp_test
+    $ cd build
+    $ make -j8
+    $ make install
+    ($ make package)
+
+    $ ccmake . 
+      (enable/disable options and press 'c') 
+    $ make install
+
+
+Good luck, and may the foo be with you!
+........................................
+
+| Jonas Juselius, Tromsø, November 2012
+|
+| email: <jonas.juselius@uit.no> 
+| www  :   http://ansatte.uit.no/jonas.juselius
+
+.. vim:ft=rst:
