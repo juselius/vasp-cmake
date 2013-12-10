@@ -67,8 +67,8 @@ if (RACCMU_DGEMV)
     add_definitions(-DRACCMU_DGEMV)
 endif()
 
-add_subdirectory(lapack)
-add_subdirectory(src)
+#add_subdirectory(lapack)
+add_subdirectory(vasp)
 
 if (ENABLE_TESTS)
     set (PROJECT_REPOSITORY "https://git.example.com/example")

@@ -24,7 +24,9 @@ include_directories(
     )
 set (FFT3D fft3dfurth.F90 fft3dlib.F90)
 
-add_library(vasp5 STATIC 
+add_subdirectory(lapack)
+
+set(VASP_SRC 
     symmetry.F90 symlib.F90 lattlib.F90 random.F90 base.F90 mpi.F90
     smart_allocate.F90 xml.F90 constant.F90 jacobi.F90 main_mpi.F90 scala.F90
     asa.F90 lattice.F90 poscar.F90 ini.F90 mgrid.F90 xclib.F90 vdw_nl.F90
@@ -55,7 +57,12 @@ add_library(vasp5 STATIC
     hyperfine.F90 wannier_interpol.F90 k-proj.F90 ${FFT3D}
     )
 
-add_executable(${VASP_BIN} main.F90)
+set (srcdir ${CMAKE_SOURCE_DIR}/src)
+add_prefix(VASP_SRC ${srcdir} ${VASP_SRC})
+
+add_library(vasp5 STATIC ${VASP_SRC})
+
+add_executable(${VASP_BIN} ${srcdir}/main.F90)
 target_link_libraries(${VASP_BIN}
     vasp5 
     dmy
@@ -65,6 +72,5 @@ target_link_libraries(${VASP_BIN}
 
 install(TARGETS ${VASP_BIN}
     RUNTIME DESTINATION bin
-#    CONFIGURATIONS Release
     )
 
