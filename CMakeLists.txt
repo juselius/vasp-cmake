@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
-project(VASP) 
+project(VASP)
 enable_language(Fortran)
 
 set (PROJECT_VERSION_MAJOR 5)
@@ -9,7 +9,7 @@ set (PROJECT_VERSION_MINOR 3)
 set (PROJECT_VERSION_PATCH 2)
 
 option(ENABLE_BLAS "Use BLAS backend for linear algebra" ON)
-option(ENABLE_LAPACK "Use LAPACK backend for linear algebra" OFF)
+option(ENABLE_LAPACK "Use LAPACK backend for linear algebra" ON)
 option(ENABLE_MPI "Enable MPI parallelization" ON)
 option(ENABLE_OPENMP "Enable OpenMP parallelization" OFF)
 option(ENABLE_TESTS "Enable test suite" OFF)
@@ -83,7 +83,7 @@ configure_file (
     ${PROJECT_BINARY_DIR}/config.h
     )
 
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY 
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY
     "VASP - The Vienna Ab initio Simulation Package")
 set(CPACK_PACKAGE_VENDOR "Institut fuer Materialphysik, Uni Wien, Austria")
 set(CPACK_PACKAGE_CONTACT "Georg Kresse <Georg.Kresse@univie.ac.at>")
@@ -93,6 +93,6 @@ set(CPACK_PACKAGE_DESCRIPTION_FILE ${CMAKE_CURRENT_SOURCE_DIR}/INFO.rst)
 set(CPACK_RESOURCE_FILE_README ${CMAKE_CURRENT_SOURCE_DIR}/README.rst)
 set(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_CURRENT_SOURCE_DIR}/COPYING)
 set(CPACK_GENERATOR TGZ DEB RPM)
-include(ConfigPackaging) 
+include(ConfigPackaging)
 
 # vim:ft=cmake
