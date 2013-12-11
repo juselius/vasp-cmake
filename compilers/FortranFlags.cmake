@@ -1,7 +1,7 @@
 if (NOT DEFINED DEFAULT_Fortran_FLAGS_SET)
 if(CMAKE_Fortran_COMPILER_ID MATCHES GNU) # this is gfortran
     set(CMAKE_Fortran_FLAGS
-        "-cpp -ffree-form -ffree-line-length-none -ff2c -fno-second-underscore")
+        "-cpp -ffree-line-length-none -ff2c -fno-second-underscore")
     set(CMAKE_Fortran_FLAGS_DEBUG
         "-O0 -g -fbacktrace")
     set(CMAKE_Fortran_FLAGS_RELEASE
@@ -19,7 +19,7 @@ if(CMAKE_Fortran_COMPILER_ID MATCHES GNU) # this is gfortran
     add_definitions(-DHOST="gfortran" -DCACHE_SIZE=4096 -DMINLOOP=1)
 elseif(CMAKE_Fortran_COMPILER_ID MATCHES Intel)
     set(CMAKE_Fortran_FLAGS
-        "-w -fpp -Wp,-f_com=no,-free -free -assume byterecl -traceback -lowercase")
+        "-w -fpp -Wp,-f_com=no -assume byterecl -traceback -lowercase")
     set(CMAKE_Fortran_FLAGS_DEBUG   "-O0 -g")
     set(CMAKE_Fortran_FLAGS_RELEASE "-O3 -xW -ip")
     if(ENABLE_BOUNDS_CHECK)

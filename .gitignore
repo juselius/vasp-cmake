@@ -3,3 +3,5 @@
 *.swp
 build/
 debug/
+cmake/bump-version
+src/
