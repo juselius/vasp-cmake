@@ -19,7 +19,7 @@ if(CMAKE_Fortran_COMPILER_ID MATCHES GNU) # this is gfortran
     add_definitions(-DHOST="gfortran" -DCACHE_SIZE=4096 -DMINLOOP=1)
 elseif(CMAKE_Fortran_COMPILER_ID MATCHES Intel)
     set(CMAKE_Fortran_FLAGS
-        "-w -fpp -assume byterecl -traceback -lowercase")
+        "-w -fpp -Wp,-f_com=no -assume byterecl -traceback -lowercase")
     set(CMAKE_Fortran_FLAGS_DEBUG   "-O0 -g")
     set(CMAKE_Fortran_FLAGS_RELEASE "-O3 -xW -ip")
     if(ENABLE_BOUNDS_CHECK)
